@@ -9,9 +9,9 @@ inputs:
   api-url:
     description: 'CodeReap scanner endpoint. Override only if you self-host.'
     required: false
-    default: 'https://codereap.vercel.app/api/scan'
+    default: 'https://vibe-audit-hazel.vercel.app/api/scan'
   github-token:
-    description: 'GitHub token used to read PR files and post comments. Use ${{ secrets.GITHUB_TOKEN }}.'
+    description: 'GitHub token used to read PR files and post comments. Pass secrets.GITHUB_TOKEN.'
     required: true
   fail-on:
     description: 'Severity at which the action fails the workflow. One of: none | low | medium | high | critical.'
@@ -41,7 +41,7 @@ inputs:
   report-base-url:
     description: 'Base URL used to build the public report link in the comment.'
     required: false
-    default: 'https://codereap.vercel.app'
+    default: 'https://vibe-audit-hazel.vercel.app'
 
 outputs:
   grade:
