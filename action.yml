@@ -1,0 +1,64 @@
+name: 'CodeReap Security Scan'
+description: 'Catch hardcoded keys, SQL injection, plain-text passwords, weak JWT, and hallucinated packages in AI-generated code — directly on every pull request.'
+author: 'CodeReap'
+branding:
+  icon: 'shield'
+  color: 'green'
+
+inputs:
+  api-url:
+    description: 'CodeReap scanner endpoint. Override only if you self-host.'
+    required: false
+    default: 'https://codereap.vercel.app/api/scan'
+  github-token:
+    description: 'GitHub token used to read PR files and post comments. Use ${{ secrets.GITHUB_TOKEN }}.'
+    required: true
+  fail-on:
+    description: 'Severity at which the action fails the workflow. One of: none | low | medium | high | critical.'
+    required: false
+    default: 'critical'
+  comment:
+    description: 'Whether to post a PR comment with the scan results.'
+    required: false
+    default: 'true'
+  max-files:
+    description: 'Maximum number of changed files to scan in a single run. Files beyond this are listed as "skipped".'
+    required: false
+    default: '50'
+  skip-paths:
+    description: 'Newline-separated path prefixes to skip (e.g. "test/", "vendor/").'
+    required: false
+    default: |
+      node_modules/
+      dist/
+      build/
+      .next/
+      out/
+      coverage/
+      venv/
+      __pycache__/
+      vendor/
+  report-base-url:
+    description: 'Base URL used to build the public report link in the comment.'
+    required: false
+    default: 'https://codereap.vercel.app'
+
+outputs:
+  grade:
+    description: 'Worst grade across scanned files (A, B, C, D, F).'
+  total-issues:
+    description: 'Total number of findings across all scanned files.'
+  critical:
+    description: 'Number of critical findings.'
+  high:
+    description: 'Number of high-severity findings.'
+  medium:
+    description: 'Number of medium-severity findings.'
+  low:
+    description: 'Number of low-severity findings.'
+  report-url:
+    description: 'Public shareable CodeReap report for this run.'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

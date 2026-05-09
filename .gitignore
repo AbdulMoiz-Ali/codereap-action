@@ -1,0 +1,5 @@
+node_modules/
+lib/
+*.log
+.env
+# We DO commit dist/ — GitHub Actions executes the bundle directly from the repo.

@@ -1,0 +1,22 @@
+{
+  "name": "codereap-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action that scans pull requests with CodeReap and posts a security report.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
+    "lint": "tsc --noEmit",
+    "package": "npm run build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@vercel/ncc": "^0.38.3",
+    "typescript": "^5.7.0"
+  }
+}
